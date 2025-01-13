@@ -1,0 +1,249 @@
+[gd_scene load_steps=26 format=3 uid="uid://dfjsfjg0sr38c"]
+
+[ext_resource type="Shader" path="res://background.gdshader" id="1_icbcv"]
+[ext_resource type="Shader" path="res://control.gdshader" id="1_ukovc"]
+[ext_resource type="FontFile" uid="uid://cgn2tcjqivlg7" path="res://assets/fonts/m6x11.ttf" id="3_grj83"]
+[ext_resource type="Shader" path="res://fish-eyes.gdshader" id="4_tvh3s"]
+[ext_resource type="Shader" path="res://color-distort.gdshader" id="5_glcpl"]
+[ext_resource type="Shader" path="res://anti-aliasing.gdshader" id="6_0mj6h"]
+[ext_resource type="Texture2D" uid="uid://bx72qb1qtajm7" path="res://assets/images/red-btn.png" id="7_065sh"]
+[ext_resource type="FontFile" uid="uid://chth4yuj6m6kq" path="res://assets/fonts/m6x11plus.ttf" id="8_gq1s5"]
+[ext_resource type="Texture2D" uid="uid://n81t0ixrdymu" path="res://assets/images/blue-btn.png" id="9_0hw0h"]
+[ext_resource type="Shader" path="res://fire-number.gdshader" id="9_xqo8m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2fuy"]
+shader = ExtResource("1_icbcv")
+shader_parameter/polar_coordinates = false
+shader_parameter/polar_center = Vector2(0.5, 0.5)
+shader_parameter/polar_zoom = 1.0
+shader_parameter/polar_repeat = 3.0
+shader_parameter/spin_rotation = -2.0
+shader_parameter/spin_speed = 5.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.184314, 0.45098, 0.933333, 1)
+shader_parameter/colour_2 = Color(0.0666667, 0.109804, 0.133333, 1)
+shader_parameter/colour_3 = Color(0, 0, 0, 0)
+shader_parameter/contrast = 1.5
+shader_parameter/spin_amount = 0.265
+shader_parameter/pixel_filter = 756.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pujqb"]
+font = ExtResource("3_grj83")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_henq6"]
+noise_type = 3
+seed = 6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ykdxk"]
+noise = SubResource("FastNoiseLite_henq6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_po3oo"]
+shader = ExtResource("9_xqo8m")
+shader_parameter/bottom_color = Color(0.984314, 0.992157, 0.933333, 1)
+shader_parameter/middle_color = Color(0.972549, 0.47451, 0.258824, 1)
+shader_parameter/top_color = Color(1, 0.298039, 0.25098, 1)
+shader_parameter/fire_alpha = 1.0
+shader_parameter/fire_speed = Vector2(-0.2, 1.5)
+shader_parameter/fire_aperture = 0.461
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ykdxk")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mqrxj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aikcd"]
+font = ExtResource("8_gq1s5")
+font_size = 60
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.364706)
+shadow_offset = Vector2(4, 3)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0w7a2"]
+noise_type = 3
+seed = 5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uc66s"]
+noise = SubResource("FastNoiseLite_0w7a2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05gvo"]
+shader = ExtResource("9_xqo8m")
+shader_parameter/bottom_color = Color(0.984314, 0.992157, 0.933333, 1)
+shader_parameter/middle_color = Color(0, 0.996078, 1, 1)
+shader_parameter/top_color = Color(0, 0.576471, 0.996078, 1)
+shader_parameter/fire_alpha = 1.0
+shader_parameter/fire_speed = Vector2(0.2, 1.5)
+shader_parameter/fire_aperture = 0.461
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_uc66s")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1snga"]
+font = ExtResource("8_gq1s5")
+font_size = 60
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.313726)
+shadow_offset = Vector2(-4, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2xa6"]
+shader = ExtResource("1_ukovc")
+shader_parameter/screen_resolution = Vector2(480, 270)
+shader_parameter/scanline_intensity = 0.05
+shader_parameter/color_bleed_weight = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysaqo"]
+shader = ExtResource("5_glcpl")
+shader_parameter/screen_resolution = Vector2(1152, 648)
+shader_parameter/distortion_size = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya2ux"]
+shader = ExtResource("4_tvh3s")
+shader_parameter/screen_resolution = Vector2(1152, 648)
+shader_parameter/fisheye_intensity = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p357h"]
+shader = ExtResource("6_0mj6h")
+shader_parameter/screen_resolution = Vector2(1152, 648)
+shader_parameter/edge_threshold = 0.1
+shader_parameter/smoothing_factor = 0.5
+
+[node name="Node2D" type="Node2D"]
+
+[node name="body" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="ColorRect" parent="body"]
+material = SubResource("ShaderMaterial_j2fuy")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="margin" type="MarginContainer" parent="body"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -20.0
+offset_right = 60.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="body/margin"]
+layout_mode = 2
+text = "HELLO WORLD!"
+label_settings = SubResource("LabelSettings_pujqb")
+horizontal_alignment = 1
+
+[node name="number" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="red" type="Node2D" parent="number"]
+position = Vector2(525, 548)
+scale = Vector2(0.357099, 0.355263)
+
+[node name="fire" type="TextureRect" parent="number/red"]
+material = SubResource("ShaderMaterial_po3oo")
+offset_left = -104.0
+offset_top = -259.0
+offset_right = 106.0
+offset_bottom = -37.0
+texture = SubResource("PlaceholderTexture2D_mqrxj")
+
+[node name="Red-btn" type="Sprite2D" parent="number/red"]
+texture = ExtResource("7_065sh")
+
+[node name="Label" type="Label" parent="number/red"]
+offset_left = -64.4079
+offset_top = -33.7779
+offset_right = 62.5921
+offset_bottom = 26.2221
+text = "24,000"
+label_settings = SubResource("LabelSettings_aikcd")
+horizontal_alignment = 1
+
+[node name="blue" type="Node2D" parent="number"]
+position = Vector2(626, 549)
+scale = Vector2(0.359649, 0.359649)
+
+[node name="fire" type="TextureRect" parent="number/blue"]
+material = SubResource("ShaderMaterial_05gvo")
+offset_left = -106.0
+offset_top = -259.0
+offset_right = 106.0
+offset_bottom = -28.0
+texture = SubResource("PlaceholderTexture2D_mqrxj")
+
+[node name="Blue-btn" type="Sprite2D" parent="number/blue"]
+texture = ExtResource("9_0hw0h")
+
+[node name="Label" type="Label" parent="number/blue"]
+offset_left = -64.4079
+offset_top = -33.7779
+offset_right = 62.5921
+offset_bottom = 26.2221
+text = "15,000"
+label_settings = SubResource("LabelSettings_1snga")
+horizontal_alignment = 1
+
+[node name="crt_layer" type="CanvasLayer" parent="."]
+
+[node name="crt" type="ColorRect" parent="crt_layer"]
+material = SubResource("ShaderMaterial_p2xa6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="color_distortion_layer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="color-distort" type="ColorRect" parent="color_distortion_layer"]
+material = SubResource("ShaderMaterial_ysaqo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="fish_eyes_layer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="fish-eyes" type="ColorRect" parent="fish_eyes_layer"]
+material = SubResource("ShaderMaterial_ya2ux")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="anti_aliasing_layer" type="CanvasLayer" parent="."]
+
+[node name="anti-aliasing" type="ColorRect" parent="anti_aliasing_layer"]
+material = SubResource("ShaderMaterial_p357h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 13.0
+offset_right = 3.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
