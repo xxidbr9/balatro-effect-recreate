@@ -4,6 +4,6 @@ I've been playing a lot of Balatro recently, so I tried to recreate some of the 
 
 You can watch the example video below:
 
-![Balatro Effect](./.github/mp4/source.mp4)
+[![Balatro Effect](./.github/mp4/ss.png)](./.github/mp4/source.mp4)
 
 BUY BALATRO NOW: playbalatro.com
