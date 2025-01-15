@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dfjsfjg0sr38c"]
+[gd_scene load_steps=27 format=3 uid="uid://dfjsfjg0sr38c"]
 
 [ext_resource type="Shader" path="res://background.gdshader" id="1_icbcv"]
 [ext_resource type="Shader" path="res://control.gdshader" id="1_ukovc"]
@@ -11,20 +11,38 @@
 [ext_resource type="Texture2D" uid="uid://n81t0ixrdymu" path="res://assets/images/blue-btn.png" id="9_0hw0h"]
 [ext_resource type="Shader" path="res://fire-number.gdshader" id="9_xqo8m"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_siuto"]
+shader = ExtResource("1_icbcv")
+shader_parameter/polar_coordinates = false
+shader_parameter/polar_center = Vector2(0.5, 0.5)
+shader_parameter/polar_zoom = 1.0
+shader_parameter/polar_repeat = 3.0
+shader_parameter/spin_rotation = 2.0
+shader_parameter/spin_speed = 7.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.870588, 0.266667, 0.231373, 1)
+shader_parameter/colour_2 = Color(0, 0.419608, 0.705882, 1)
+shader_parameter/colour_3 = Color(0.0862745, 0.137255, 0.145098, 1)
+shader_parameter/contrast = 3.5
+shader_parameter/lighting = 0.3
+shader_parameter/spin_amount = 0.2
+shader_parameter/pixel_filter = 740.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j2fuy"]
 shader = ExtResource("1_icbcv")
 shader_parameter/polar_coordinates = false
 shader_parameter/polar_center = Vector2(0.5, 0.5)
 shader_parameter/polar_zoom = 1.0
 shader_parameter/polar_repeat = 3.0
-shader_parameter/spin_rotation = -2.0
-shader_parameter/spin_speed = 5.0
+shader_parameter/spin_rotation = 1.0
+shader_parameter/spin_speed = 6.0
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/colour_1 = Color(0.184314, 0.45098, 0.933333, 1)
 shader_parameter/colour_2 = Color(0.0666667, 0.109804, 0.133333, 1)
 shader_parameter/colour_3 = Color(0, 0, 0, 0)
 shader_parameter/contrast = 1.5
-shader_parameter/spin_amount = 0.265
+shader_parameter/lighting = 0.0
+shader_parameter/spin_amount = 0.1
 shader_parameter/pixel_filter = 756.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_pujqb"]
@@ -94,7 +112,7 @@ shader_parameter/distortion_size = 0.7
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ya2ux"]
 shader = ExtResource("4_tvh3s")
 shader_parameter/screen_resolution = Vector2(1152, 648)
-shader_parameter/fisheye_intensity = 0.01
+shader_parameter/fisheye_intensity = 0.02
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p357h"]
 shader = ExtResource("6_0mj6h")
@@ -116,6 +134,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="background" type="ColorRect" parent="body"]
+material = SubResource("ShaderMaterial_siuto")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="background2" type="ColorRect" parent="body"]
+visible = false
 material = SubResource("ShaderMaterial_j2fuy")
 layout_mode = 1
 anchors_preset = 15
@@ -127,6 +157,7 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="margin" type="MarginContainer" parent="body"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -147,6 +178,7 @@ label_settings = SubResource("LabelSettings_pujqb")
 horizontal_alignment = 1
 
 [node name="number" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 
@@ -199,6 +231,7 @@ label_settings = SubResource("LabelSettings_1snga")
 horizontal_alignment = 1
 
 [node name="crt_layer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="crt" type="ColorRect" parent="crt_layer"]
 material = SubResource("ShaderMaterial_p2xa6")
@@ -210,6 +243,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="color_distortion_layer" type="CanvasLayer" parent="."]
+visible = false
 follow_viewport_enabled = true
 
 [node name="color-distort" type="ColorRect" parent="color_distortion_layer"]
@@ -222,6 +256,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="fish_eyes_layer" type="CanvasLayer" parent="."]
+visible = false
 follow_viewport_enabled = true
 
 [node name="fish-eyes" type="ColorRect" parent="fish_eyes_layer"]
@@ -234,6 +269,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="anti_aliasing_layer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="anti-aliasing" type="ColorRect" parent="anti_aliasing_layer"]
 material = SubResource("ShaderMaterial_p357h")

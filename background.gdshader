@@ -15,6 +15,7 @@ uniform highp vec4 colour_1 : source_color;
 uniform highp vec4 colour_2 : source_color;
 uniform highp vec4 colour_3 : source_color;
 uniform highp float contrast = 2.;
+uniform highp float lighting = 0.4;
 uniform highp float spin_amount = 0.36;
 uniform highp float pixel_filter = 700.;
 #define SPIN_EASE 1.0
@@ -49,9 +50,9 @@ vec4 effect(vec2 screenSize, vec2 screen_coords){
     highp float c1p = max(0.,1. - contrast_mod*abs(1.-paint_res));
     highp float c2p = max(0.,1. - contrast_mod*abs(paint_res));
     highp float c3p = 1. - min(1., c1p + c2p);
-
-
-	highp vec4 ret_col = (0.3/contrast)*colour_1 + (1. - 0.3/contrast)*(colour_1*c1p + colour_2*c2p + vec4(c3p*colour_3.rgb, c3p*colour_1.a));
+	
+	highp float ligth = (lighting - 0.2) * max(c1p*5. - 4., 0.) + lighting * max(c2p*5. - 4., 0.); 
+	highp vec4 ret_col = (0.3/contrast)*colour_1 + (1. - 0.3/contrast)*(colour_1*c1p + colour_2*c2p + vec4(c3p*colour_3.rgb, c3p*colour_1.a)) + ligth;
 	return ret_col;
 }
 

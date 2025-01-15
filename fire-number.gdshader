@@ -40,10 +40,11 @@ void fragment() {
     
     // Calculate gradient position and mix three colors
     float gradient_pos = clamp(noise * 0.08, 0.3, 2.0);
-	vec4 smoth_mid_color = smoothstep(top_color, middle_color, vec4(1));
+	//vec4 smoth_mid_color = smoothstep(top_color, middle_color, vec4(1));
     vec4 fire_color = tri_color_mix(bottom_color, middle_color, top_color, gradient_pos);
     
 	
+
     // Set final color and alpha
     COLOR = fire_color;
     COLOR.a = clamp(noise, 0.0, 1.0) * fire_alpha;
